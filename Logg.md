@@ -1,0 +1,1 @@
+25/1 - Idag har jag jobbat med min planering för att sedan fortsätta med mitt klass diagram nästa lektion. Om jag får tid kommer jag även att jobba med att göra backend till detta projekt.
