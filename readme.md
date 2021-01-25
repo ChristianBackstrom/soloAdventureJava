@@ -1,0 +1,3 @@
+I detta projekt kommer jag att göra ett grafiskt gränsnitt för detta solo äventyr. Jag kommer även att göra editorn med ett grafiskt gränssnitt för att göra det enekelt att redigera det.
+
+Jag kommer att börja med att göra en viewform och få till det grafiskagrännsnittet för att sedan göra backend till delen som endast visar själva spelet. Efter detta kommer jag att använda mig av samma view för att göra editorn. Jag kommer även göra backend till den som jag förväntar mig lägga det mesta av min tid på.
