@@ -5,11 +5,7 @@ public class Story {
     public Story(String text, String[] choices) {
         this.text = text;
         this.choices = choices;
-    }
-
-    public Story(String text, String choices) {
-        this.text = text;
-        this.choices[0] = choices;
+        
     }
 
     public String getText() {
