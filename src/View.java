@@ -26,12 +26,19 @@ public class View extends JFrame {
         this.button4.setVisible(false);
 
         this.panel.add(this.textArea1);
+
+        this.panel.add(this.button1);
+        this.panel.add(this.button2);
+        this.panel.add(this.button3);
+        this.panel.add(this.button4);
+
         this.disableButton();
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000,800);
 
         this.add(this.panel);
+        this.setVisible(true);
     }
 
     public void choices(Story story){
@@ -48,7 +55,7 @@ public class View extends JFrame {
                 this.button3.setVisible(true);
                 this.button3.setText(story.getChoice(i));
             }
-            if (i == 2){
+            if (i == 3){
                 this.button4.setVisible(true);
                 this.button4.setText(story.getChoice(i));
             }
