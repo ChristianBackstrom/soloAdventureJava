@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class View extends JFrame {
 
@@ -65,5 +67,48 @@ public class View extends JFrame {
 
         this.textArea1.setText(story.getText());
         this.choices(story);
+    }
+
+    public Story getStory(){
+        String story = this.textArea1.getText();
+        ArrayList<String> choices = new ArrayList<String>();
+
+
+        if (this.button1.isVisible()){
+            choices.add(this.button1.getText());
+
+            if (this.button2.isVisible()){
+                choices.add(this.button2.getText());
+
+                if (this.button3.isVisible()){
+                    choices.add(this.button3.getText());
+
+                    if (this.button4.isVisible()){
+                        choices.add(this.button4.getText());
+
+                    }
+                }
+            }
+        }
+
+        String[] choice = getStringArray(choices);
+
+        return new Story(story, choice);
+    }
+
+    public static String[] getStringArray(ArrayList<String> arr)
+    {
+
+        // declaration and initialise String Array
+        String str[] = new String[arr.size()];
+
+        // ArrayList to Array Conversion
+        for (int j = 0; j < arr.size(); j++) {
+
+            // Assign each value to String array
+            str[j] = arr.get(j);
+        }
+
+        return str;
     }
 }
