@@ -3,3 +3,5 @@
 26/1 - Idag har jag gjort klart mitt klassdiagram och har även gjort klassen för storyn med de olika valen. Jag har även jobbat på min view och ser till att den kommer kunna skriva ut rätt antal val. 
 
 1/2 - Idag har jag gjort kalrt min viewform så att knapparna anpassas dynamiskt beroende på hur många val spelaren har. Nästa lektion kommer jag att fixa databasen för att kunna nå de olika valen och storyn
+
+2/2 - Idah har jag gjort klart delen av databasen som kommer kunna visa upp de olika delarna av sagan. Nästa lektion kommer jag att fixa så att de olika valen kommer leda till nästa del av sagan.
