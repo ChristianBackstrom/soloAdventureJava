@@ -18,59 +18,77 @@ public class database {
     }
 
     public Story getData(int i){
-        try {
-            Story story;
+        Story story = null;
 
-            String text;
-            String[] choices;
+        String text = "";
+        String[] choices;
+        int[] targetID;
+
+        try {
 
             // Setup statement
             Statement stmt = this.conn.createStatement();
-            Scanner tgb = new Scanner(System.in);
-            int currentRoom = 1;
                 // Create query and execute
                 String strSelect = "select body from story where id = " + i;
 
                 ResultSet rset = stmt.executeQuery(strSelect);
 
                 // Loop through the result set and print
-                while (rset.next()) {
-                    String body = rset.getString("body");
-                    System.out.println(body);
-                }
+            while (rset.next())
+                    text = rset.getString("body");
 
-                strSelect = "select description, targetId from links where storyId = " + currentRoom;
+                strSelect = "select description, target_id from links where story_id = " + i;
 
                 rset = stmt.executeQuery(strSelect);
                 ArrayList<Integer> storyLinks = new ArrayList();
+                ArrayList<String> storyDescription = new ArrayList();
 
                 // Loop through the result set and print
                 int rowCount = 0;
                 while (rset.next()) {
                     String description = rset.getString("description");
-                    int storyLink = rset.getInt("targetId");
+                    int storyLink = rset.getInt("target_id");
                     storyLinks.add(storyLink);
-                    System.out.println(++rowCount + " " + description);
+                    storyDescription.add(description);
                 }
 
-                if (rowCount == 0) {
-                    System.out.println("Thanks for playing...");
-                    currentRoom = 0;
-                } else {
-                    System.out.println("Make your choice: ");
-                    int input = tgb.nextInt();
-                    while (input < 1 || input > storyLinks.size()) {
-                        System.out.println("Illegal choice, try again");
-                        input = tgb.nextInt();
-                    }
-                    currentRoom = storyLinks.get(input - 1);
-                }
+                choices = getStringArray(storyDescription);
+                targetID = getIntArray(storyLinks);
+
+                story = new Story(text, choices, targetID);
+
             // Close conn and stmt
-            conn.close();
+            this.conn.close();
             stmt.close();
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
+        return story;
+    }
+
+    public static String[] getStringArray(ArrayList<String> arr)
+    {
+
+        // declaration and initialise String Array
+        String str[] = new String[arr.size()];
+
+        // ArrayList to Array Conversion
+        for (int j = 0; j < arr.size(); j++) {
+
+            // Assign each value to String array
+            str[j] = arr.get(j);
+        }
+        return str;
+    }
+
+    public static int[] getIntArray(ArrayList<Integer> arr){
+        int inte[] = new int[arr.size()];
+
+        for (int j = 0; j < arr.size(); j++){
+
+            inte[j] = arr.get(j);
+        }
+        return inte;
     }
 
 }
