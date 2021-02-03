@@ -5,16 +5,9 @@ import java.util.Scanner;
 public class database {
 
     private Connection conn;
+    private Statement stmt;
 
     database(){
-        try {
-            this.conn = DriverManager.getConnection(
-                    "jdbc:mysql://" + databaseConfig.DBURL + ":" + databaseConfig.port + "/" + databaseConfig.DBname +
-                            "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-                    databaseConfig.user, databaseConfig.password);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     public Story getData(int i){
@@ -26,8 +19,17 @@ public class database {
 
         try {
 
+            try {
+                this.conn = DriverManager.getConnection(
+                        "jdbc:mysql://" + databaseConfig.DBURL + ":" + databaseConfig.port + "/" + databaseConfig.DBname +
+                                "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                        databaseConfig.user, databaseConfig.password);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            this.stmt = this.conn.createStatement();
+
             // Setup statement
-            Statement stmt = this.conn.createStatement();
                 // Create query and execute
                 String strSelect = "select body from story where id = " + i;
 

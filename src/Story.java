@@ -1,18 +1,22 @@
 public class Story {
     private String text;
     private String[] choices;
-    private int[] storyID;
+    private int[] targetID;
 
-    public Story(String text, String[] choices, int storyID) {
+    public Story(String text, String[] choices, int targetID) {
         this.text = text;
         this.choices = choices;
-        this.storyID[0] = storyID;
+        this.targetID[0] = targetID;
     }
 
-    public Story(String text, String[] choices, int[] storyID) {
+    public Story(String text, String[] choices, int[] targetID) {
         this.text = text;
         this.choices = choices;
-        this.storyID = storyID;
+        this.targetID = targetID;
+    }
+
+    public int[] getTargetID() {
+        return targetID;
     }
 
     public Story(String text, String[] choices){

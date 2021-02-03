@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +11,11 @@ public class View extends JFrame {
     private JButton button2;
     private JButton button3;
     private JButton button4;
+    private int[] targetID;
 
     View(){
         this.panel = new JPanel();
-        this.textArea1 = new JTextArea(20,70);
+        this.textArea1 = new JTextArea(2,88);
         this.button1 = new JButton();
         this.button2 = new JButton();
         this.button3 = new JButton();
@@ -74,6 +76,7 @@ public class View extends JFrame {
 
         this.textArea1.setText(story.getText());
         this.choices(story);
+        this.targetID = story.getTargetID();
     }
 
     public Story getStory(){
@@ -118,4 +121,9 @@ public class View extends JFrame {
 
         return str;
     }
+
+    void addButton1Listener(ActionListener listenForLoadListener) { this.button1.addActionListener(listenForLoadListener); }
+    void addButton2Listener(ActionListener listenForLoadListener) { this.button2.addActionListener(listenForLoadListener); }
+    void addButton3Listener(ActionListener listenForLoadListener) { this.button3.addActionListener(listenForLoadListener); }
+    void addButton4Listener(ActionListener listenForLoadListener) { this.button4.addActionListener(listenForLoadListener); }
 }
