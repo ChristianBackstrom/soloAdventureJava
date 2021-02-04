@@ -23,8 +23,8 @@ public class Model {
 
     private class nextStory1 implements ActionListener{
         public void actionPerformed(ActionEvent e){
-                currentStory = db.getData(currentStory.getTargetID()[0]);
-                view.setStory(currentStory);
+            currentStory = db.getData(currentStory.getTargetID()[0]);
+            view.setStory(currentStory);
         }
     }
 
