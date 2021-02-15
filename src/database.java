@@ -88,7 +88,7 @@ public class database {
 
             // Setup statement
             // Create query and execute
-            String strSelect = "select body from story where id = ";
+            String strSelect = "INSERT" + story.getText() + "INTO body from story where id = ";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 

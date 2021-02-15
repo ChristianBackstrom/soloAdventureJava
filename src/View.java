@@ -177,7 +177,7 @@ public class View extends JFrame {
 
         String[] choice = getStringArray(choices);
         int[] targetiD = getIntArray(targetId);
-        
+
         return new Story(story, choice, targetiD);
     }
 
