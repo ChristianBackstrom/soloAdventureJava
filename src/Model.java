@@ -18,6 +18,9 @@ public class Model {
         view.addButton3Listener(new nextStory3());
         view.addButton4Listener(new nextStory4());
 
+        view.addEditorListener(new enableEditor());
+        view.addPlayerListener(new enablePlayer());
+
         view.setStory(currentStory);
     }
 
@@ -46,6 +49,18 @@ public class Model {
         public void actionPerformed(ActionEvent e){
             currentStory = db.getData(currentStory.getTargetID()[3]);
             view.setStory(currentStory);
+        }
+    }
+
+    private class enableEditor implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            view.enableEditorMode();
+        }
+    }
+
+    private class enablePlayer implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            view.enablePlayerMode(currentStory);
         }
     }
 }
