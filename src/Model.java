@@ -20,6 +20,7 @@ public class Model {
 
         view.addEditorListener(new enableEditor());
         view.addPlayerListener(new enablePlayer());
+        view.addDbListener(new dbLoader());
 
         view.setStory(currentStory);
     }
@@ -61,6 +62,13 @@ public class Model {
     private class enablePlayer implements ActionListener{
         public void actionPerformed(ActionEvent e){
             view.enablePlayerMode(currentStory);
+        }
+    }
+
+    private class dbLoader implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            currentStory = db.getData(Integer.parseInt(JOptionPane.showInputDialog("write storyId of story and links you want to edit")));
+            view.setEditStory(currentStory);
         }
     }
 }

@@ -16,6 +16,7 @@ public class database {
         String text = "";
         String[] choices;
         int[] targetID;
+        int storyID = 1;
 
         try {
 
@@ -39,10 +40,10 @@ public class database {
             while (rset.next())
                     text = rset.getString("body");
 
-                strSelect = "select description, target_id from links where story_id = " + i;
+                strSelect = "select description, target_id, story_id from links where story_id = " + i;
 
                 rset = stmt.executeQuery(strSelect);
-                ArrayList<Integer> storyLinks = new ArrayList();
+                ArrayList<Integer> targetLinks = new ArrayList();
                 ArrayList<String> storyDescription = new ArrayList();
 
                 // Loop through the result set and print
@@ -50,14 +51,17 @@ public class database {
                 while (rset.next()) {
                     String description = rset.getString("description");
                     int storyLink = rset.getInt("target_id");
-                    storyLinks.add(storyLink);
+                    int storyid = rset.getInt("story_id");
+                    targetLinks.add(storyLink);
                     storyDescription.add(description);
+                    storyID = storyid;
                 }
 
-                choices = getStringArray(storyDescription);
-                targetID = getIntArray(storyLinks);
 
-                story = new Story(text, choices, targetID);
+                choices = getStringArray(storyDescription);
+                targetID = getIntArray(targetLinks);
+
+                story = new Story(text, choices, targetID, storyID);
 
             // Close conn and stmt
             this.conn.close();

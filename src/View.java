@@ -25,6 +25,8 @@ public class View extends JFrame {
     private JTextField targetId2;
     private JTextField targetId3;
     private JTextField targetId4;
+    private JButton dbLoader;
+    private JTextField storyId;
     private Dimension dimension;
 
     View(){
@@ -36,7 +38,9 @@ public class View extends JFrame {
         this.panel.add(menuBar);
         this.setJMenuBar(menuBar);
 
-        this.textArea1 = new JTextArea(2,88);
+        this.textArea1 = new JTextArea(2,80);
+        this.storyId = new JTextField(10);
+
         this.button1 = new JButton();
         this.button2 = new JButton();
         this.button3 = new JButton();
@@ -57,16 +61,22 @@ public class View extends JFrame {
         this.targetId3 = new JTextField(10);
         this.targetId4 = new JTextField(10);
 
+        this.dbLoader = new JButton();
+
+        this.dbLoader.setPreferredSize(dimension);
+
         this.linkDescriptions = new JTextField("here are your choices", 80);
         this.storyDescription = new JTextField("this is where the story describes", 80);
         this.linkDescriptions.setEditable(false);
         this.storyDescription.setEditable(false);
+        this.storyId.setVisible(false);
 
         this.textArea1.setLineWrap(true);
         this.textArea1.setEditable(false);
 
         this.panel.add(this.storyDescription);
         this.panel.add(this.textArea1);
+        this.panel.add(this.storyId);
         this.panel.add(this.button1);
         this.panel.add(this.button2);
         this.panel.add(this.button3);
@@ -80,6 +90,10 @@ public class View extends JFrame {
         this.panel.add(this.targetId3);
         this.panel.add(this.linkDes4);
         this.panel.add(this.targetId4);
+        this.panel.add(this.dbLoader);
+
+        this.dbLoader.setText("load from database");
+        this.dbLoader.setVisible(false);
 
         this.ButtonVisible(false);
         this.TextfieldVisible(false);
@@ -121,6 +135,27 @@ public class View extends JFrame {
         }
     }
 
+    public void editChoices(Story story){
+        for (int i = 0; i < story.getChoices().length; i++){
+            if (i == 0){
+                this.linkDes1.setText(story.getChoice(i));
+                this.targetId1.setText(String.valueOf(story.getTargetID(i)));
+            }
+            if (i == 1) {
+                this.linkDes2.setText(story.getChoice(i));
+                this.targetId2.setText(String.valueOf(story.getTargetID(i)));
+            }
+            if (i == 2){
+                this.linkDes4.setText(story.getChoice(i));
+                this.targetId3.setText(String.valueOf(story.getTargetID(i)));
+            }
+            if (i == 3){
+                this.linkDes4.setText(story.getChoice(i));
+                this.targetId4.setText(String.valueOf(story.getTargetID(i)));
+            }
+        }
+    }
+
     public void ButtonVisible(boolean b){
         this.button1.setVisible(b);
         this.button2.setVisible(b);
@@ -139,13 +174,31 @@ public class View extends JFrame {
         this.targetId2.setVisible(b);
         this.targetId3.setVisible(b);
         this.targetId4.setVisible(b);
+        this.storyId.setVisible(b);
     }
 
     public void setStory(Story story){
         this.ButtonVisible(false);
 
         this.textArea1.setText(story.getText());
+        this.storyId.setText(String.valueOf(story.getStoryID()));
         this.choices(story);
+    }
+
+    public void setEditStory(Story story){
+        this.linkDes1.setText(null);
+        this.linkDes2.setText(null);
+        this.linkDes3.setText(null);
+        this.linkDes4.setText(null);
+        this.targetId1.setText(null);
+        this.targetId2.setText(null);
+        this.targetId3.setText(null);
+        this.targetId4.setText(null);
+
+
+        this.textArea1.setText(story.getText());
+        this.storyId.setText(String.valueOf(story.getStoryID()));
+        this.editChoices(story);
     }
 
     public Story getStory(){
@@ -219,16 +272,20 @@ public class View extends JFrame {
     void addButton4Listener(ActionListener listenForLoadListener) { this.button4.addActionListener(listenForLoadListener); }
     void addEditorListener(ActionListener listenForLoadListener) { this.editor.addActionListener(listenForLoadListener); }
     void addPlayerListener(ActionListener listenForLoadListener) { this.player.addActionListener(listenForLoadListener); }
+    void addDbListener(ActionListener listenForLoadListener) { this.dbLoader.addActionListener(listenForLoadListener); }
 
     public void enableEditorMode(){
         this.textArea1.setEditable(true);
+        this.textArea1.setColumns(70);
         ButtonVisible(false);
 
         TextfieldVisible(true);
+        this.dbLoader.setVisible(true);
     }
 
     public void enablePlayerMode(Story story){
         this.textArea1.setEditable(true);
+        this.textArea1.setColumns(80);
         choices(story);
 
         TextfieldVisible(false);
