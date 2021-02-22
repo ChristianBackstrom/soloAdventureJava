@@ -27,10 +27,14 @@ public class View extends JFrame {
     private JTextField targetId4;
     private JButton dbLoader;
     private JTextField storyId;
+    private JButton saveDatabase;
+    private JButton updateDatabase;
     private Dimension dimension;
+    private Dimension dimension2;
 
     View(){
         this.dimension = new Dimension(900, 26);
+        this.dimension2 = new Dimension(450, 26);
 
         this.panel = new JPanel();
 
@@ -45,6 +49,14 @@ public class View extends JFrame {
         this.button2 = new JButton();
         this.button3 = new JButton();
         this.button4 = new JButton();
+
+        this.saveDatabase = new JButton();
+        this.updateDatabase = new JButton();
+
+        this.saveDatabase.setPreferredSize(dimension2);
+        this.updateDatabase.setPreferredSize(dimension2);
+        this.saveDatabase.setText("save to database");
+        this.updateDatabase.setText("update the database");
 
         this.button1.setPreferredSize(dimension);
         this.button2.setPreferredSize(dimension);
@@ -91,7 +103,10 @@ public class View extends JFrame {
         this.panel.add(this.linkDes4);
         this.panel.add(this.targetId4);
         this.panel.add(this.dbLoader);
+        this.panel.add(this.saveDatabase);
+        this.panel.add(this.updateDatabase);
 
+        this.storyId.setEditable(false);
         this.dbLoader.setText("load from database");
         this.dbLoader.setVisible(false);
 
@@ -146,7 +161,7 @@ public class View extends JFrame {
                 this.targetId2.setText(String.valueOf(story.getTargetID(i)));
             }
             if (i == 2){
-                this.linkDes4.setText(story.getChoice(i));
+                this.linkDes3.setText(story.getChoice(i));
                 this.targetId3.setText(String.valueOf(story.getTargetID(i)));
             }
             if (i == 3){

@@ -72,11 +72,12 @@ public class database {
         return story;
     }
 
-    public void saveToDatabase(Story story){
+    public void updateDatabase(Story story){
 
         String text = story.getText();
         String[] choices = story.getChoices();
         int[] targetID = story.getTargetID();
+        int storyID = story.getStoryID();
 
         try {
 
@@ -92,33 +93,14 @@ public class database {
 
             // Setup statement
             // Create query and execute
-            String strSelect = "INSERT" + story.getText() + "INTO body from story where id = ";
+            String strSelect = "UPDATE `te18`.`story` SET `id` = '"+ storyID + "', `body` = '" + text + "' WHERE `id` = '" + storyID + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            // Loop through the result set and print
-            while (rset.next())
-                text = rset.getString("body");
-
-            strSelect = "select description, target_id from links where story_id = ";
-
-            rset = stmt.executeQuery(strSelect);
-            ArrayList<Integer> storyLinks = new ArrayList();
-            ArrayList<String> storyDescription = new ArrayList();
-
-            // Loop through the result set and print
-            int rowCount = 0;
-            while (rset.next()) {
-                String description = rset.getString("description");
-                int storyLink = rset.getInt("target_id");
-                storyLinks.add(storyLink);
-                storyDescription.add(description);
+            for (int i = 0; i < choices.length; i++){
+                strSelect = "UPDATE `te18`.`links` SET `description` = '" + choices[i] + "', `target_id` = '" + targetID[i] + "' WHERE `story_id` = '1';";
+                stmt.executeUpdate(strSelect);
             }
-
-            choices = getStringArray(storyDescription);
-            targetID = getIntArray(storyLinks);
-
-            story = new Story(text, choices, targetID);
 
             // Close conn and stmt
             this.conn.close();
