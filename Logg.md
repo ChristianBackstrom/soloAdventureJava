@@ -10,7 +10,7 @@
 
 16/2 - IDag har gjort så att man kan redigera de olika valen för att nästa lektion ska jag göra så att de går att spara i databasen
 
-
+22/2 - Idag har jag gjoty så att man kan update databasen och redigera det som finns i den. Nästa lektion ska jag göra så att man kan spara in nya storys
 
 
 
