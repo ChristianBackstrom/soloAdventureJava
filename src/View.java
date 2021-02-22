@@ -57,6 +57,8 @@ public class View extends JFrame {
         this.updateDatabase.setPreferredSize(dimension2);
         this.saveDatabase.setText("save to database");
         this.updateDatabase.setText("update the database");
+        this.updateDatabase.setVisible(false);
+        this.saveDatabase.setVisible(false);
 
         this.button1.setPreferredSize(dimension);
         this.button2.setPreferredSize(dimension);
@@ -245,8 +247,9 @@ public class View extends JFrame {
 
         String[] choice = getStringArray(choices);
         int[] targetiD = getIntArray(targetId);
+        int storyId = Integer.parseInt(this.storyId.getText());
 
-        return new Story(story, choice, targetiD);
+        return new Story(story, choice, targetiD, storyId);
     }
 
     public static String[] getStringArray(ArrayList<String> arr)
@@ -288,6 +291,8 @@ public class View extends JFrame {
     void addEditorListener(ActionListener listenForLoadListener) { this.editor.addActionListener(listenForLoadListener); }
     void addPlayerListener(ActionListener listenForLoadListener) { this.player.addActionListener(listenForLoadListener); }
     void addDbListener(ActionListener listenForLoadListener) { this.dbLoader.addActionListener(listenForLoadListener); }
+    void addSaveListener(ActionListener listenForLoadListener) { this.saveDatabase.addActionListener(listenForLoadListener); }
+    void addUpdateListener(ActionListener listenForLoadListener) { this.updateDatabase.addActionListener(listenForLoadListener); }
 
     public void enableEditorMode(){
         this.textArea1.setEditable(true);
@@ -296,6 +301,8 @@ public class View extends JFrame {
 
         TextfieldVisible(true);
         this.dbLoader.setVisible(true);
+        this.saveDatabase.setVisible(true);
+        this.updateDatabase.setVisible(true);
     }
 
     public void enablePlayerMode(Story story){
@@ -304,5 +311,7 @@ public class View extends JFrame {
         choices(story);
 
         TextfieldVisible(false);
+        this.saveDatabase.setVisible(false);
+        this.updateDatabase.setVisible(false);
     }
 }

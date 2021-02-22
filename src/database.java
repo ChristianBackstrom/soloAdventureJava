@@ -93,9 +93,9 @@ public class database {
 
             // Setup statement
             // Create query and execute
-            String strSelect = "UPDATE `te18`.`story` SET `id` = '"+ storyID + "', `body` = '" + text + "' WHERE `id` = '" + storyID + ";";
+            String strSelect = "UPDATE `te18`.`story` SET `id` = '" + storyID + "', `body` = '" + text + "' WHERE `id` = '" + storyID + "';";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
+            stmt.executeUpdate(strSelect);
 
             for (int i = 0; i < choices.length; i++){
                 strSelect = "UPDATE `te18`.`links` SET `description` = '" + choices[i] + "', `target_id` = '" + targetID[i] + "' WHERE `story_id` = '1';";
