@@ -108,7 +108,7 @@ public class View extends JFrame {
         this.panel.add(this.saveDatabase);
         this.panel.add(this.updateDatabase);
 
-        this.storyId.setEditable(false);
+        this.storyId.setEditable(true);
         this.dbLoader.setText("load from database");
         this.dbLoader.setVisible(false);
 
@@ -218,7 +218,41 @@ public class View extends JFrame {
         this.editChoices(story);
     }
 
-    public Story getStory(){
+    public Story getSaveStory(){
+        String story = this.textArea1.getText();
+        ArrayList<String> choices = new ArrayList<>();
+        ArrayList<Integer> targetId = new ArrayList<>();
+
+
+        if (!this.linkDes1.getText().trim().isEmpty()){
+            choices.add(this.linkDes1.getText());
+            targetId.add(Integer.parseInt(this.targetId1.getText()));
+
+            if (!this.linkDes2.getText().trim().isEmpty()){
+                choices.add(this.linkDes2.getText());
+                targetId.add(Integer.parseInt(this.targetId2.getText()));
+
+                if (!this.linkDes3.getText().trim().isEmpty()){
+                    choices.add(this.linkDes3.getText());
+                    targetId.add(Integer.parseInt(this.targetId3.getText()));
+
+                    if (!this.linkDes4.getText().trim().isEmpty()){
+                        choices.add(this.linkDes4.getText());
+                        targetId.add(Integer.parseInt(this.targetId4.getText()));
+
+                    }
+                }
+            }
+        }
+
+        String[] choice = getStringArray(choices);
+        int[] targetiD = getIntArray(targetId);
+        int storyId = Integer.parseInt(this.storyId.getText());
+
+        return new Story(story, choice, targetiD, storyId);
+    }
+
+    public Story getUpdateStory(){
         String story = this.textArea1.getText();
         ArrayList<String> choices = new ArrayList<>();
         ArrayList<Integer> targetId = new ArrayList<>();
@@ -247,9 +281,8 @@ public class View extends JFrame {
 
         String[] choice = getStringArray(choices);
         int[] targetiD = getIntArray(targetId);
-        int storyId = Integer.parseInt(this.storyId.getText());
 
-        return new Story(story, choice, targetiD, storyId);
+        return new Story(story, choice, targetiD);
     }
 
     public static String[] getStringArray(ArrayList<String> arr)
@@ -311,6 +344,7 @@ public class View extends JFrame {
         choices(story);
 
         TextfieldVisible(false);
+        this.dbLoader.setVisible(false);
         this.saveDatabase.setVisible(false);
         this.updateDatabase.setVisible(false);
     }

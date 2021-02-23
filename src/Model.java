@@ -22,6 +22,7 @@ public class Model {
         view.addPlayerListener(new enablePlayer());
         view.addDbListener(new dbLoader());
         view.addUpdateListener(new updateDatabase());
+        view.addSaveListener(new saveToDatabase());
 
         view.setStory(currentStory);
     }
@@ -57,6 +58,7 @@ public class Model {
     private class enableEditor implements ActionListener{
         public void actionPerformed(ActionEvent e){
             view.enableEditorMode();
+            view.setEditStory(currentStory);
         }
     }
 
@@ -74,14 +76,15 @@ public class Model {
     }
     private class saveToDatabase implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            currentStory = db.getData(Integer.parseInt(JOptionPane.showInputDialog("write storyId of story and links you want to edit")));
-            view.setEditStory(currentStory);
+            currentStory = view.getSaveStory();
+            db.saveToDatabase(currentStory);
         }
     }
     private class updateDatabase implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            currentStory = view.getStory();
-            db.updateDatabase(currentStory);
+            currentStory = view.getUpdateStory();
+            Story story = new Story(currentStory.getText(), currentStory.getChoices(), currentStory.getTargetID(), currentStory.getStoryID());
+            db.updateDatabase(story);
         }
     }
 }

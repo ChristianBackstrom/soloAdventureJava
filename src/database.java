@@ -16,7 +16,7 @@ public class database {
         String text = "";
         String[] choices;
         int[] targetID;
-        int storyID = 1;
+        int storyID = i;
 
         try {
 
@@ -32,7 +32,7 @@ public class database {
 
             // Setup statement
                 // Create query and execute
-                String strSelect = "select body from story where id = " + i;
+                String strSelect = "select body from story where id = " + storyID;
 
                 ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -40,21 +40,18 @@ public class database {
             while (rset.next())
                     text = rset.getString("body");
 
-                strSelect = "select description, target_id, story_id from links where story_id = " + i;
+                strSelect = "select description, target_id from links where story_id = " + storyID;
 
                 rset = stmt.executeQuery(strSelect);
                 ArrayList<Integer> targetLinks = new ArrayList();
                 ArrayList<String> storyDescription = new ArrayList();
 
                 // Loop through the result set and print
-                int rowCount = 0;
                 while (rset.next()) {
                     String description = rset.getString("description");
                     int storyLink = rset.getInt("target_id");
-                    int storyid = rset.getInt("story_id");
                     targetLinks.add(storyLink);
                     storyDescription.add(description);
-                    storyID = storyid;
                 }
 
 
@@ -109,6 +106,45 @@ public class database {
             ex.printStackTrace();
         }
     }
+
+    public void saveToDatabase(Story story){
+
+        String text = story.getText();
+        String[] choices = story.getChoices();
+        int[] targetID = story.getTargetID();
+        int storyID = story.getStoryID();
+
+        try {
+
+            try {
+                this.conn = DriverManager.getConnection(
+                        "jdbc:mysql://" + databaseConfig.DBURL + ":" + databaseConfig.port + "/" + databaseConfig.DBname +
+                                "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                        databaseConfig.user, databaseConfig.password);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            this.stmt = this.conn.createStatement();
+
+            // Setup statement
+            // Create query and execute
+            String strSelect = "INSERT INTO `story` (`id`,`body`) VALUES ('" + storyID + "','"+ text +"');";
+            stmt.executeUpdate(strSelect);
+
+            System.out.println(choices.length);
+            for (int i = 0; i < choices.length; i++){
+                strSelect = "INSERT INTO `links` (`story_id`, `description`, `target_id`) VALUES ('" + storyID + "', '" + choices[i] + "', '" + targetID[i] + "');";
+                stmt.executeUpdate(strSelect);
+            }
+
+            // Close conn and stmt
+            this.conn.close();
+            stmt.close();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     public static String[] getStringArray(ArrayList<String> arr)
     {
