@@ -227,22 +227,22 @@ public class View extends JFrame {
         if (!this.linkDes1.getText().trim().isEmpty()){
             choices.add(this.linkDes1.getText());
             targetId.add(Integer.parseInt(this.targetId1.getText()));
+        }
 
-            if (!this.linkDes2.getText().trim().isEmpty()){
-                choices.add(this.linkDes2.getText());
-                targetId.add(Integer.parseInt(this.targetId2.getText()));
+        if (!this.linkDes2.getText().trim().isEmpty()){
+            choices.add(this.linkDes2.getText());
+            targetId.add(Integer.parseInt(this.targetId2.getText()));
+        }
 
-                if (!this.linkDes3.getText().trim().isEmpty()){
-                    choices.add(this.linkDes3.getText());
-                    targetId.add(Integer.parseInt(this.targetId3.getText()));
+        if (!this.linkDes3.getText().trim().isEmpty()){
+            choices.add(this.linkDes3.getText());
+            targetId.add(Integer.parseInt(this.targetId3.getText()));
 
-                    if (!this.linkDes4.getText().trim().isEmpty()){
-                        choices.add(this.linkDes4.getText());
-                        targetId.add(Integer.parseInt(this.targetId4.getText()));
+        }
 
-                    }
-                }
-            }
+        if (!this.linkDes4.getText().trim().isEmpty()){
+            choices.add(this.linkDes4.getText());
+            targetId.add(Integer.parseInt(this.targetId4.getText()));
         }
 
         String[] choice = getStringArray(choices);
@@ -258,25 +258,25 @@ public class View extends JFrame {
         ArrayList<Integer> targetId = new ArrayList<>();
 
 
-        if (this.button1.isVisible()){
+        if (!this.linkDes1.getText().trim().isEmpty()){
             choices.add(this.linkDes1.getText());
             targetId.add(Integer.parseInt(this.targetId1.getText()));
+        }
 
-            if (this.button2.isVisible()){
-                choices.add(this.linkDes2.getText());
-                targetId.add(Integer.parseInt(this.targetId2.getText()));
+        if (!this.linkDes2.getText().trim().isEmpty()){
+            choices.add(this.linkDes2.getText());
+            targetId.add(Integer.parseInt(this.targetId2.getText()));
+        }
 
-                if (this.button3.isVisible()){
-                    choices.add(this.linkDes3.getText());
-                    targetId.add(Integer.parseInt(this.targetId3.getText()));
+        if (!this.linkDes3.getText().trim().isEmpty()){
+            choices.add(this.linkDes3.getText());
+            targetId.add(Integer.parseInt(this.targetId3.getText()));
 
-                    if (this.button4.isVisible()){
-                        choices.add(this.linkDes4.getText());
-                        targetId.add(Integer.parseInt(this.targetId4.getText()));
+        }
 
-                    }
-                }
-            }
+        if (!this.linkDes4.getText().trim().isEmpty()){
+            choices.add(this.linkDes4.getText());
+            targetId.add(Integer.parseInt(this.targetId4.getText()));
         }
 
         String[] choice = getStringArray(choices);

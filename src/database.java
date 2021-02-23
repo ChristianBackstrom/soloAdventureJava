@@ -31,34 +31,34 @@ public class database {
             this.stmt = this.conn.createStatement();
 
             // Setup statement
-                // Create query and execute
-                String strSelect = "select body from story where id = " + storyID;
+            // Create query and execute
+            String strSelect = "select body from story where id = " + storyID;
 
-                ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet rset = stmt.executeQuery(strSelect);
 
-                // Loop through the result set and print
+            // Loop through the result set and print
             while (rset.next())
-                    text = rset.getString("body");
+                text = rset.getString("body");
 
-                strSelect = "select description, target_id from links where story_id = " + storyID;
+            strSelect = "select description, target_id from links where story_id = " + storyID;
 
-                rset = stmt.executeQuery(strSelect);
-                ArrayList<Integer> targetLinks = new ArrayList();
-                ArrayList<String> storyDescription = new ArrayList();
+            rset = stmt.executeQuery(strSelect);
+            ArrayList<Integer> targetLinks = new ArrayList();
+            ArrayList<String> storyDescription = new ArrayList();
 
-                // Loop through the result set and print
-                while (rset.next()) {
-                    String description = rset.getString("description");
-                    int storyLink = rset.getInt("target_id");
-                    targetLinks.add(storyLink);
-                    storyDescription.add(description);
-                }
+            // Loop through the result set and print
+            while (rset.next()) {
+                String description = rset.getString("description");
+                int storyLink = rset.getInt("target_id");
+                targetLinks.add(storyLink);
+                storyDescription.add(description);
+            }
 
 
-                choices = getStringArray(storyDescription);
-                targetID = getIntArray(targetLinks);
+            choices = getStringArray(storyDescription);
+            targetID = getIntArray(targetLinks);
 
-                story = new Story(text, choices, targetID, storyID);
+            story = new Story(text, choices, targetID, storyID);
 
             // Close conn and stmt
             this.conn.close();
@@ -94,9 +94,16 @@ public class database {
 
             stmt.executeUpdate(strSelect);
 
+            System.out.println(choices.length);
             for (int i = 0; i < choices.length; i++){
-                strSelect = "UPDATE `te18`.`links` SET `description` = '" + choices[i] + "', `target_id` = '" + targetID[i] + "' WHERE `story_id` = '1';";
-                stmt.executeUpdate(strSelect);
+                strSelect = "UPDATE `te18`.`links` SET `description` = '" + choices[i] + "', `target_id` = '" + targetID[i] + "' WHERE `story_id` = '" + storyID + "';";
+                int result = stmt.executeUpdate(strSelect);
+                System.out.println(result);
+                    if (result == 0){
+                        System.out.println("når hit");
+                        strSelect = "INSERT INTO `links` (`story_id`, `description`, `target_id`) VALUES ('" + storyID + "', '" + choices[i] + "', '" + targetID[i] + "');";
+                        stmt.executeUpdate(strSelect);
+                    }
             }
 
             // Close conn and stmt
