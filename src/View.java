@@ -271,7 +271,6 @@ public class View extends JFrame {
         if (!this.linkDes3.getText().trim().isEmpty()){
             choices.add(this.linkDes3.getText());
             targetId.add(Integer.parseInt(this.targetId3.getText()));
-
         }
 
         if (!this.linkDes4.getText().trim().isEmpty()){

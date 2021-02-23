@@ -12,17 +12,4 @@
 
 22/2 - Idag har jag gjoty så att man kan update databasen och redigera det som finns i den. Nästa lektion ska jag göra så att man kan spara in nya storys
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+23/2 - Idag har gjort det till ett mvc format och gjort så att man kan spara och ändra i databasen
